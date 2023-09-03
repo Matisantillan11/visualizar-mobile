@@ -1,0 +1,25 @@
+{
+	"auth": {
+		"onboarding": {
+			"title": "Discover the WORLD of books through AUGMENTED REALITY",
+			"subtitle": "Reading doesn't have to be boring. With AUGMENTED REALITY, you can now have fun and learn at the same time. Join us!"
+		},
+		"login": {
+			"title": {
+				"first-line": "Hello",
+				"second-line": "Log in"
+			},
+			"form": {
+				"email": {
+					"placeholder": "Enter your email"
+				},
+				"password": {
+					"placeholder": "Enter your password"
+				},
+				"button": "Login"
+			},
+			"forgot": "Forgot your password?",
+			"register": { "account": "Don't have an account yet?", "create": "Sign up" }
+		}
+	}
+}

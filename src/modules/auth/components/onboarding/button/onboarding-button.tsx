@@ -1,4 +1,6 @@
+import { FC } from 'react'
 import Icon from '@expo/vector-icons/Ionicons'
+import { PressableProps } from 'react-native'
 import { colors } from '@visualizar/common/lib/colors'
 import styled from 'styled-components/native'
 
@@ -12,7 +14,7 @@ const SCircleContainer = styled.View`
 	align-items: center;
 	margin-top: 36px;
 `
-export const SIconContainer = styled.View`
+export const SIconContainer = styled.Pressable`
 	width: 30px;
 	height: 30px;
 	background: ${({ theme }) => theme.purple.mediumPurple};
@@ -21,10 +23,10 @@ export const SIconContainer = styled.View`
 	align-items: center;
 `
 
-export const OnboardingButton = () => {
+export const OnboardingButton: FC<PressableProps> = (props) => {
 	return (
 		<SCircleContainer>
-			<SIconContainer>
+			<SIconContainer {...props}>
 				<Icon name='chevron-forward-outline' size={20} color={colors.primary.white} />
 			</SIconContainer>
 		</SCircleContainer>

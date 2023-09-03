@@ -1,0 +1,25 @@
+{
+	"auth": {
+		"onboarding": {
+			"title": "Descubre el MUNDO de los libros a través REALIDAD AUMENTADA",
+			"subtitle": "Leer no tiene porque ser aburrido. Con la REALIDAD AUMENTADA ahora podes divertirte y aprender al mismo tiempo. Unite!"
+		},
+		"login": {
+			"title": {
+				"first-line": "Hola",
+				"second-line": "Inicia sesión"
+			},
+			"form": {
+				"email": {
+					"placeholder": "Ingresa tu correo electrónico"
+				},
+				"password": {
+					"placeholder": "Ingresa tu contraseña"
+				},
+				"button": "Ingresar"
+			},
+			"forgot": "Olvidaste tu contraseña?",
+			"register": { "account": "Aún no tienes cuenta?", "create": "Registrate" }
+		}
+	}
+}

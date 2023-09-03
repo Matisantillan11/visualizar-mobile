@@ -1,58 +1,56 @@
 import { Image, SafeAreaView, Text, View, useWindowDimensions } from 'react-native'
 
+import { FC } from 'react'
 import { OnboardingButton } from '../onboarding/button/onboarding-button'
+import { StepOneProps } from '@visualizar/auth/interfaces/onboarding.interface'
 import VirtualRealityImage from '@visualizar/common/assets/virtual-reality.png'
 import { colors } from '@visualizar/common/lib/colors'
+import { i18n } from '@visualizar/common/lib/internacionalization'
 
-export const OnboardingStepOne = () => {
-	const { width, height } = useWindowDimensions()
+export const OnboardingStepOne: FC<StepOneProps> = ({ handleNextStep }) => {
+	const { width } = useWindowDimensions()
 
 	return (
-		<View
-			style={{
-				flex: 1,
-				backgroundColor: colors.purple.darkerPurple,
-			}}>
-			<SafeAreaView style={{ flex: 1 }}>
-				<View
-					style={{
-						justifyContent: 'center',
-						alignItems: 'center',
-					}}>
-					<Image source={VirtualRealityImage} />
-				</View>
+		<SafeAreaView style={{ flex: 1, backgroundColor: colors.purple.darkerPurple }}>
+			<View
+				style={{
+					justifyContent: 'center',
+					alignItems: 'center',
+					paddingTop: 50,
+				}}>
+				<Image source={VirtualRealityImage} />
+			</View>
 
-				<View
+			<View
+				style={{
+					width,
+					marginTop: 100,
+					justifyContent: 'center',
+					alignItems: 'center',
+					paddingHorizontal: 5,
+				}}>
+				<Text
 					style={{
-						width,
-						marginTop: 150,
-						justifyContent: 'center',
-						alignItems: 'center',
 						paddingHorizontal: 10,
+						fontSize: 20,
+						fontWeight: 'bold',
+						color: colors.primary.darkWhite,
 					}}>
-					<Text
-						style={{
-							fontSize: 20,
-							fontWeight: 'bold',
-							color: colors.primary.darkWhite,
-						}}>
-						Descubre el MUNDO de los libros a través REALIDAD AUMENTADA
-					</Text>
-					<Text
-						style={{
-							fontSize: 14,
-							color: colors.primary.gray,
-							paddingHorizontal: 15,
-							marginVertical: 15,
-						}}>
-						Leer no tiene porque ser aburrido. Con la REALIDAD AUMENTADA ahora podes divertirte y aprender al mismo
-						tiempo. Unite!
-					</Text>
-				</View>
-				<View style={{ width, justifyContent: 'center', alignItems: 'center' }}>
-					<OnboardingButton />
-				</View>
-			</SafeAreaView>
-		</View>
+					{i18n.t('auth.onboarding.title')}
+				</Text>
+				<Text
+					style={{
+						fontSize: 14,
+						color: colors.primary.gray,
+						paddingHorizontal: 15,
+						marginVertical: 15,
+					}}>
+					{i18n.t('auth.onboarding.subtitle')}
+				</Text>
+			</View>
+			<View style={{ width, justifyContent: 'center', alignItems: 'center' }}>
+				<OnboardingButton onPress={() => handleNextStep()} />
+			</View>
+		</SafeAreaView>
 	)
 }
