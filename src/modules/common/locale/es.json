@@ -20,6 +20,27 @@
 			},
 			"forgot": "Olvidaste tu contraseña?",
 			"register": { "account": "Aún no tienes cuenta?", "create": "Registrate" }
+		},
+		"forgot": {
+			"title": "Olvidaste tu contraseña?",
+			"subtitle": "No te preocupes. Decinos tu correo electrónico y nosotros te ayudamos.",
+			"form": {
+				"email": {
+					"label": "Correo electrónico",
+					"placeholder": "Ingresa tu correo electrónico"
+				},
+
+				"button": "Enviar"
+			},
+			"success": {
+				"title": "Chequeá tu email",
+				"subtitle": "Te enviamos instrucciones a tu correo para recuperar tu contraseña",
+				"buttons": {
+					"open": "Abrir Correo",
+					"later": "Continuar, lo hare luego"
+				},
+				"success": "El correo fue enviado correctamente"
+			}
 		}
 	}
 }

@@ -1,5 +1,7 @@
 import 'react-native-gesture-handler'
 
+import { QueryClient, QueryClientProvider } from 'react-query'
+
 import { AuthStack } from '@visualizar/common/stacks/auth-stack'
 import { ThemeProvider } from 'styled-components/native'
 import Toast from 'react-native-toast-message'
@@ -8,11 +10,13 @@ import { firebaseConfig } from './firebaseConfig'
 import { initializeApp } from 'firebase/app'
 
 initializeApp(firebaseConfig)
-
+const queryClient = new QueryClient()
 export default function App() {
 	return (
 		<ThemeProvider theme={colors}>
-			<AuthStack />
+			<QueryClientProvider client={queryClient}>
+				<AuthStack />
+			</QueryClientProvider>
 			<Toast />
 		</ThemeProvider>
 	)

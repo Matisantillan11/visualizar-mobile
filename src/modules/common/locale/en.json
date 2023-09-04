@@ -20,6 +20,26 @@
 			},
 			"forgot": "Forgot your password?",
 			"register": { "account": "Don't have an account yet?", "create": "Sign up" }
+		},
+		"forgot": {
+			"title": "Forgot your password?",
+			"subtitle": "Don't worry. Tell us your email, and we'll help you.",
+			"form": {
+				"email": {
+					"label": "Email",
+					"placeholder": "Enter your email"
+				},
+				"button": "Send"
+			},
+			"success": {
+				"title": "Check your email",
+				"subtitle": "We've sent instructions to your email to recover your password",
+				"buttons": {
+					"open": "Open Email",
+					"later": "Continue, I'll do it later"
+				},
+				"success": "The email was sent successfully"
+			}
 		}
 	}
 }
