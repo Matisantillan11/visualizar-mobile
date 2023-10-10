@@ -1,4 +1,4 @@
-import { AuthRootParamsList } from '@visualizar/common/stacks/types/auth-stack.type'
+import { AuthRootParamsList } from '@visualizar/common/stacks/types/auth-stack'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 export type OnboardingProps = NativeStackScreenProps<AuthRootParamsList, 'Onboarding'>

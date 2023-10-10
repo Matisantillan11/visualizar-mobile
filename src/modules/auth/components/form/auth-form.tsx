@@ -1,8 +1,9 @@
 import { Controller, FieldValues, useForm } from 'react-hook-form'
-import { Fragment, useState } from 'react'
+import { FC, Fragment, useEffect, useState } from 'react'
 import { StyleSheet, TouchableOpacity, View, useWindowDimensions } from 'react-native'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
+import { AuthFormProps } from '@visualizar/auth/interfaces/form/auth-form'
 import { Button } from '@visualizar/common/ui/button/button'
 import { Input } from '@visualizar/common/ui/Input/input'
 import { Ionicons } from '@expo/vector-icons'
@@ -10,11 +11,14 @@ import { Paragraph } from '@visualizar/common/ui/Text/text.component'
 import Toast from 'react-native-toast-message'
 import { colors } from '@visualizar/common/lib/colors'
 import { i18n } from '@visualizar/common/lib/internacionalization'
+import { useAuthenticate } from '@visualizar/auth/hooks/useAuthenticate'
 
-export const AuthForm = () => {
+export const AuthForm: FC<AuthFormProps> = ({ redirectToForgot }) => {
 	const { width } = useWindowDimensions()
-	const [isLogin, setIsLogin] = useState<boolean>(false)
 
+	const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
+
+	const { authenticateMutation } = useAuthenticate()
 	const {
 		control,
 		clearErrors,
@@ -23,26 +27,15 @@ export const AuthForm = () => {
 		formState: { errors },
 	} = useForm()
 
-	const onSubmit = async (data: FieldValues) => {
-		setIsLogin(true)
-		const auth = getAuth()
-		const { email, password } = data
-		await signInWithEmailAndPassword(auth, email, password)
-			.then((userCredential) => {
-				const user = userCredential.user
-				console.log({ user })
-			})
-			.catch((error) => {
-				const errorMessage = error.message
-				reset()
-				Toast.show({
-					type: 'error',
-					text1: 'Opssss!',
-					text2: errorMessage,
-				})
-			})
-			.finally(() => setIsLogin(false))
+	const { isSuccess, isLoading: isLogin } = authenticateMutation
+
+	const onSubmit = (data: FieldValues) => {
+		authenticateMutation.mutate(data)
 	}
+
+	useEffect(() => {
+		reset()
+	}, [isSuccess])
 
 	return (
 		<Fragment>
@@ -61,6 +54,7 @@ export const AuthForm = () => {
 							onChangeText={onChange}
 							value={value}
 							onBlur={onBlur}
+							keyboardType='email-address'
 							onFocus={() => clearErrors('email')}
 							error={errors.email ? true : false}
 						/>
@@ -84,7 +78,24 @@ export const AuthForm = () => {
 							onBlur={onBlur}
 							onFocus={() => clearErrors('password')}
 							error={errors.password ? true : false}
-							rightIcon={<Ionicons name='eye-outline' size={16} color={colors.text.text3} />}
+							secureTextEntry={!passwordVisible}
+							rightIcon={
+								passwordVisible ? (
+									<Ionicons
+										name='eye-outline'
+										size={16}
+										color={colors.text.text3}
+										onPress={() => setPasswordVisible(!passwordVisible)}
+									/>
+								) : (
+									<Ionicons
+										name='eye-off-outline'
+										size={16}
+										color={colors.text.text3}
+										onPress={() => setPasswordVisible(!passwordVisible)}
+									/>
+								)
+							}
 						/>
 					)}
 				/>
@@ -100,7 +111,7 @@ export const AuthForm = () => {
 					<Paragraph>{i18n.t('auth.login.form.button')}</Paragraph>
 				</Button>
 
-				<TouchableOpacity style={authFormStyle.forgotPassword}>
+				<TouchableOpacity style={authFormStyle.forgotPassword} onPress={() => redirectToForgot()}>
 					<Paragraph weight={700} color={colors.purple.mediumPurple}>
 						{i18n.t('auth.login.forgot')}
 					</Paragraph>

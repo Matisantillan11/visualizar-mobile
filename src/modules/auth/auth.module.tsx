@@ -2,12 +2,14 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { Image, SafeAreaView, View } from 'react-native'
 
 import { AuthForm } from './components/form/auth-form'
-import { AuthFormData } from './interfaces/types/authFormData'
+import { AuthFormData } from './interfaces/types/auth-form-data'
+import { FC } from 'react'
+import { LoginProps } from './interfaces/types/auth-module'
 import { Paragraph } from '@visualizar/common/ui/Text/text.component'
 import authHero from '@visualizar/common/assets/secure-login-dark.png'
 import { i18n } from '@visualizar/common/lib/internacionalization'
 
-export const AuthModule = () => {
+export const AuthModule: FC<LoginProps> = ({ navigation }) => {
 	const formMethods = useForm<AuthFormData>({
 		defaultValues: {
 			email: '',
@@ -15,6 +17,10 @@ export const AuthModule = () => {
 		},
 	})
 
+	const redirectToForgot = () => {
+		const { push } = navigation
+		push('ForgotPassword')
+	}
 	return (
 		<SafeAreaView>
 			<View style={{ padding: 20 }}>
@@ -34,7 +40,7 @@ export const AuthModule = () => {
 					</Paragraph>
 				</View>
 				<FormProvider {...formMethods}>
-					<AuthForm />
+					<AuthForm redirectToForgot={redirectToForgot} />
 				</FormProvider>
 			</View>
 		</SafeAreaView>
